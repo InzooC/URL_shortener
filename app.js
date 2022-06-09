@@ -22,10 +22,8 @@ app.get('/', (req, res) => {
 //post首頁
 app.post('/', (req, res) => {
   const originalURL = req.body.originalURL
-  console.log(originalURL)
   // 製造一個序號，把originalURL和序號一起create進database裡
   const generateURL = generateSerial()
-  console.log(generateURL)
   shortenURLdata.create({ originalURL, generateURL })     // 存入資料庫
     .catch(error => console.log(error))
   res.render('showURL', { generateURL: generateURL })
