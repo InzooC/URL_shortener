@@ -18,6 +18,10 @@ app.get('/', (req, res) => {
   res.render('index')
 })
 
+app.get('/a1', (req, res) => {
+  res.render('showURL')
+})
+
 app.listen(port, () => {
   console.log(`app is listening on http://localhost:${port}`)
 })
