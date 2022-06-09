@@ -9,8 +9,12 @@
         </div>
       </div>
       <div class="card-body mt-4">
-        <input class="form-control" type="text" placeholder="Original URL" aria-label="default input example">
-        <button class="btn btn-outline-primary mt-3" type="submit">Shorten</button>
+        <form action="/" method="POST">
+          <input class="form-control" type="text" name="originalURL" placeholder="Original URL"
+            aria-label="default input example">
+          <button class="btn btn-outline-primary mt-3" type="submit">Shorten</button>
+        </form>
+
       </div>
     </div>
 

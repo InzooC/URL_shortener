@@ -1,4 +1,4 @@
-const shortenURL = require('../shortenURL') //載入shortenURL模組
+const shortenURL = require('../shortenURLdata') //載入shortenURL模組
 const db = require('../../config/mongoose')
 
 db.once('open', () => {
