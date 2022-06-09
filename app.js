@@ -66,14 +66,11 @@ function generateSerial() {
   return serial
 }
 
-
-
-
 app.get('/:shortenURL', (req, res) => {
-  res.render('showURL')
+  const shortenURL = req.params.shortenURL
+  return shortenURLdata.find({ generateURL: shortenURL })
+    .then(url => res.redirect(`${url[0].originalURL}`))
 })
-
-
 
 app.listen(port, () => {
   console.log(`app is listening on http://localhost:${port}`)
