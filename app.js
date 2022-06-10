@@ -22,37 +22,28 @@ app.get('/', (req, res) => {
 //post首頁
 app.post('/', (req, res) => {
   const originalURL = req.body.originalURL
-  // 製造一個序號，把originalURL和序號一起create進database裡
-  const generateURL = generateSerial()
-  shortenURLdata.create({ originalURL, generateURL })     // 存入資料庫
-    .catch(error => console.log(error))
-  res.render('showURL', { generateURL: generateURL })
+  // 找出是否有一樣的originalURL
 
-  // 還無法做出判originalURL已存在於資料庫的function---之後優化
-  // const filerURL = isURLexist(originalURL)
-  // console.log(filerURL)
-  // if (filerURL.length === 0) {
-  //   console.log('沒有')
-  // } else {
-  //   console.log('修改generateURL,id是:' + filerURL.id)
-  //   shortenURLdata.findById(filerURL.id)
-  //     .then(url => {
-  //       url.generateURL = 'www.12345'
-  //       return url.save()
-  //     })
-  // }
+  shortenURLdata.find({ originalURL: originalURL })
+    .then(url => {
+      if (url.length === 0) {
+        //如果沒有，就製造新的generateURL，存進database，然候render
+        const generateURL = generateSerial()
+        shortenURLdata.create({ originalURL, generateURL })     // 存入資料庫
+          .catch(error => console.log(error))
+        res.render('showURL', { generateURL: generateURL })
+      } else if (url.length > 0) {
+        //如果有就render已經有的generateURL
+        res.render('showURL', { generateURL: url[0].generateURL })
+        console.log(url[0].generateURL)
+      }
+    })
 
 })
 
-//比對是否有相同的URL function 未成功 return的東西出不去
-// function isURLexist(originalURL) {
-//   shortenURLdata.find()
-//     .lean()
-//     .then(urls => {
-//       let filterURL = urls.filter(url => url.originalURL === originalURL)
-//       return filterURL
-//     })
-// }
+// 需要完成的功能！！
+// 若使用者沒有輸入內容，就按下了送出鈕，需要防止表單送出並提示使用者
+
 
 // 製作新序號的function
 function generateSerial() {
@@ -76,3 +67,6 @@ app.get('/:shortenURL', (req, res) => {
 app.listen(port, () => {
   console.log(`app is listening on http://localhost:${port}`)
 })
+
+// 挑戰功能
+// 使用者可以按 Copy 來複製縮短後的網址
