@@ -12,9 +12,13 @@
     </div>
     <div class="card-body mt-4">
 
-      <h4 class="">Success! Please use this link:</h4>
-      <p class="card-text" style="color: blue;">http://localhost:3000/{{generateURL}}</p>
-      <button class="btn btn-primary mt-2" type="submit">Copy</button>
+      <form action="/showURL" method="POST">
+        <h4 class="">Success! Please use this link:</h4>
+        <input style="max-width: 310px; margin: auto;" class="form-control" type="text" name="shortenURL"
+          value="http://localhost:3000/{{generateURL}}" aria-label="shortenURL" disabled>
+        <button class="btn btn-primary mt-2" type="submit">Copy</button>
+      </form>
+
     </div>
   </div>
 

@@ -50,10 +50,6 @@ app.post('/', (req, res) => {
 
 })
 
-// 需要完成的功能！！
-// 若使用者沒有輸入內容，就按下了送出鈕，需要防止表單送出並提示使用者
-
-
 // 製作新序號的function
 function generateSerial() {
   const number = '0123456789'
@@ -67,11 +63,28 @@ function generateSerial() {
   return serial
 }
 
+// 收到點選copy的動作post
+app.post('/showURL', (req, res) => {
+  // const copyURL = 
+  console.log(req.body)
+})
+
+
+// 收到shortenURL, 導向originalURL
 app.get('/:shortenURL', (req, res) => {
   const shortenURL = req.params.shortenURL
-  return shortenURLdata.find({ generateURL: shortenURL })
-    .then(url => res.redirect(`${url[0].originalURL}`))
+  shortenURLdata.find({ generateURL: shortenURL })
+    .then(url => {
+      if (typeof (url[0]) === 'undefined') {
+        res.redirect('/')
+      } else {
+        res.redirect(`${url[0].originalURL}`)
+      }
+      // if (url !== []) {
+      // }
+    })
 })
+
 
 app.listen(port, () => {
   console.log(`app is listening on http://localhost:${port}`)
