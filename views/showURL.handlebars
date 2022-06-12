@@ -11,13 +11,23 @@
       </div>
     </div>
     <div class="card-body mt-4">
+      <h4 class="">Success! Please use this link:</h4>
+      <span style="display: block; color: blue;" id="shortenURL">http://localhost:3000/{{generateURL}}</span>
+      <button type="button" class="btn btn-primary mt-2" onclick="copyURL()" data-toggle="tooltip"
+        title="Copy to Clipboard" value="copy link" readonly>Copy</button>
 
-      <form action="/showURL" method="POST">
-        <h4 class="">Success! Please use this link:</h4>
-        <input style="max-width: 310px; margin: auto;" class="form-control" type="text" name="shortenURL"
-          value="http://localhost:3000/{{generateURL}}" aria-label="shortenURL" disabled>
-        <button class="btn btn-primary mt-2" type="submit">Copy</button>
-      </form>
+      <script>
+        function copyURL() {
+          let copyText = document.getElementById("shortenURL")
+          var selection = window.getSelection();
+          var range = document.createRange();
+          range.selectNodeContents(copyText);
+          selection.removeAllRanges();
+          selection.addRange(range);
+          document.execCommand('copy');
+        }
+      </script>
+
 
     </div>
   </div>

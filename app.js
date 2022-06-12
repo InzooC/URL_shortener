@@ -65,9 +65,24 @@ function generateSerial() {
 
 // 收到點選copy的動作post
 app.post('/showURL', (req, res) => {
-  // const copyURL = 
-  console.log(req.body)
+  const copyURL = req.body.shortenURL
+  console.log(copyURL)
+  copyURL()
+
+
+
 })
+
+function copyURL() {
+  let copyText = document.getElementById("shortenURL")
+  var selection = window.getSelection();
+  var range = document.createRange();
+  range.selectNodeContents(copyText);
+  selection.removeAllRanges();
+  selection.addRange(range);
+  document.execCommand('copy');
+}
+
 
 
 // 收到shortenURL, 導向originalURL
@@ -80,8 +95,6 @@ app.get('/:shortenURL', (req, res) => {
       } else {
         res.redirect(`${url[0].originalURL}`)
       }
-      // if (url !== []) {
-      // }
     })
 })
 
