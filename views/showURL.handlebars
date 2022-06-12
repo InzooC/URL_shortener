@@ -19,8 +19,8 @@
       <script>
         function copyURL() {
           let copyText = document.getElementById("shortenURL")
-          var selection = window.getSelection();
-          var range = document.createRange();
+          const selection = window.getSelection();
+          const range = document.createRange();
           range.selectNodeContents(copyText);
           selection.removeAllRanges();
           selection.addRange(range);
