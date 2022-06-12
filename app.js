@@ -19,19 +19,17 @@ app.use(bodyParser.urlencoded({ extend: true }))
 app.get('/', (req, res) => {
   res.render('index')
 })
-//post首頁
+
+//post首頁(input 原始網址)
 app.post('/', (req, res) => {
   const originalURL = req.body.originalURL
-
   // 判斷originalURL是否有文字
   // if 沒有 跳提示
   if (originalURL.length === 0) {
     const alert = 'Please enter URL'
     res.render('index', { alert: alert })
-  } else {
-
+  } else {  
     // if 有 進入判斷循環
-
     // 找出是否已經有一樣的originalURL
     shortenURLdata.find({ originalURL: originalURL })
       .then(url => {
@@ -47,7 +45,6 @@ app.post('/', (req, res) => {
         }
       })
   }
-
 })
 
 // 製作新序號的function
@@ -62,28 +59,6 @@ function generateSerial() {
   }
   return serial
 }
-
-// 收到點選copy的動作post
-app.post('/showURL', (req, res) => {
-  const copyURL = req.body.shortenURL
-  console.log(copyURL)
-  copyURL()
-
-
-
-})
-
-function copyURL() {
-  let copyText = document.getElementById("shortenURL")
-  var selection = window.getSelection();
-  var range = document.createRange();
-  range.selectNodeContents(copyText);
-  selection.removeAllRanges();
-  selection.addRange(range);
-  document.execCommand('copy');
-}
-
-
 
 // 收到shortenURL, 導向originalURL
 app.get('/:shortenURL', (req, res) => {
@@ -102,6 +77,3 @@ app.get('/:shortenURL', (req, res) => {
 app.listen(port, () => {
   console.log(`app is listening on http://localhost:${port}`)
 })
-
-// 挑戰功能
-// 使用者可以按 Copy 來複製縮短後的網址
