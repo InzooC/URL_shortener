@@ -4,15 +4,23 @@
       <div class="card-body mt-4">
         <a style="font-size: 30px; text-decoration:none; color:black;" href="./" class="card-title">URL Shortener</a>
         <div class="text-center">
-          <img src="https://assets-lighthouse.alphacamp.co/uploads/image/file/16716/ExportedContentImage_00.png"
-            class="rounded mt-3" style="width: 150px;" alt="...">
+          <a href="/">
+            <img src="https://assets-lighthouse.alphacamp.co/uploads/image/file/16716/ExportedContentImage_00.png"
+              class="rounded mt-3" style="width: 150px;" alt="...">
+          </a>
         </div>
       </div>
       <div class="card-body mt-4">
         <form action="/" method="POST">
           <input style="max-width: 800px; margin: auto;" class="form-control" type="text" name="originalURL"
             placeholder="Original URL" aria-label="default input example">
-          <button class="btn btn-outline-primary mt-3" type="submit">Shorten</button>
+          {{#if alert}}
+          <p style="color: red; text-align: start;">Please enter URL</p>
+          <button class="btn btn-outline-primary" type="submit">Shorten</button>
+          {{else}}
+          <button class="btn btn-outline-primary mt-5" type="submit">Shorten</button>
+          {{/if}}
+
         </form>
 
       </div>

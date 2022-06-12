@@ -22,22 +22,31 @@ app.get('/', (req, res) => {
 //post首頁
 app.post('/', (req, res) => {
   const originalURL = req.body.originalURL
-  // 找出是否有一樣的originalURL
 
-  shortenURLdata.find({ originalURL: originalURL })
-    .then(url => {
-      if (url.length === 0) {
-        //如果沒有，就製造新的generateURL，存進database，然候render
-        const generateURL = generateSerial()
-        shortenURLdata.create({ originalURL, generateURL })     // 存入資料庫
-          .catch(error => console.log(error))
-        res.render('showURL', { generateURL: generateURL })
-      } else if (url.length > 0) {
-        //如果有就render已經有的generateURL
-        res.render('showURL', { generateURL: url[0].generateURL })
-        console.log(url[0].generateURL)
-      }
-    })
+  // 判斷originalURL是否有文字
+  // if 沒有 跳提示
+  if (originalURL.length === 0) {
+    const alert = 'Please enter URL'
+    res.render('index', { alert: alert })
+  } else {
+
+    // if 有 進入判斷循環
+
+    // 找出是否已經有一樣的originalURL
+    shortenURLdata.find({ originalURL: originalURL })
+      .then(url => {
+        if (url.length === 0) {
+          //如果沒有，就製造新的generateURL，存進database，然候render
+          const generateURL = generateSerial()
+          shortenURLdata.create({ originalURL, generateURL })     // 存入資料庫
+            .catch(error => console.log(error))
+          res.render('showURL', { generateURL: generateURL })
+        } else if (url.length > 0) {
+          //如果有就render已經有的generateURL
+          res.render('showURL', { generateURL: url[0].generateURL })
+        }
+      })
+  }
 
 })
 
