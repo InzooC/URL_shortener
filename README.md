@@ -19,6 +19,6 @@
 1. 安裝node.js 與 npm
 2. 下載本專案
 3. 透過終端機進入資料夾，輸入：npm install
-4. 完成npm安裝後，繼續輸入：npm run dev
+4. 完成npm安裝後，繼續輸入：npm run start
 5. 若看見 Express is listening on http://localhost:3000 則代表順利運行，打開瀏覽器進入到以下網址 http://localhost:3000
 6. 若欲暫停使用 ctrl + c
