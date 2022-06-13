@@ -17,5 +17,5 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(routes)
 
 app.listen(port, () => {
-  console.log(`app is listening on http://localhost:${port}`)
+  console.log(`Express is listening on http://localhost:${port}`)
 })
